@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Download } from "lucide-react";
-import heroImage from "@/assets/hero-bg.jpg";
 
 const Hero = () => {
   const scrollToProjects = () => {
@@ -26,9 +25,9 @@ const Hero = () => {
       className="min-h-screen flex items-center justify-center relative overflow-hidden"
     >
       {/* Background Image with Overlay */}
-      <div 
+      <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: `url(${heroImage})` }}
+        style={{ backgroundImage: `url(/hero-bg.jpg)` }}
       >
         <div className="absolute inset-0 bg-background/60 dark:bg-background/80" />
       </div>

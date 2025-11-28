@@ -225,7 +225,7 @@
   }
 
   .section-divider {
-    @apply h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent my-16;
+    @apply h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent my-2;
   }
 
   .loading-dots::after {

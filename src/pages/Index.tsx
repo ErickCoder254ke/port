@@ -6,6 +6,7 @@ import Services from "@/components/Services";
 import Projects from "@/components/Projects";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
+import VideoShowcase from "@/components/VideoShowcase";
 import { ThemeProvider } from "@/providers/ThemeProvider";
 import { Toaster } from "@/components/ui/toaster";
 
@@ -17,6 +18,8 @@ const Index = () => {
         <main>
           <Hero />
           <About />
+          <div className="section-divider" />
+          <VideoShowcase />
           <div className="section-divider" />
           <Skills />
           <div className="section-divider" />

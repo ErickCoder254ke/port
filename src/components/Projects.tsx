@@ -4,6 +4,8 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import PhoneMockup from "@/components/PhoneMockup";
+import ImageCarousel from "@/components/ImageCarousel";
 import {
   ChevronLeft,
   ChevronRight,
@@ -29,13 +31,14 @@ const Projects = () => {
       id: 1,
       title: "Huduma360ke",
       description: "A comprehensive service platform designed to streamline access to essential services. Includes features for user onboarding, booking, and tracking of services. Built with React Native (frontend) and Node.js (backend), with a scalable architecture for future integrations.",
-      image: "https://images.pexels.com/photos/4606337/pexels-photo-4606337.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop&crop=center",
+      image: "/src/assets/huduma.jpeg",
+      images: ["/src/assets/huduma.jpeg", "/src/assets/huduma1.jpeg", "/src/assets/huduma2.jpeg", "/src/assets/huduma3.jpeg", "/src/assets/huduma4.jpeg"],
       technologies: ["React Native", "Node.js", "MongoDB", "Express", "REST API"],
       category: "Mobile Development",
-      downloadUrl: "https://expo.dev/artifacts/eas/5ZJ4ZECN99Zr1mo6XsynF5.apk",
       githubUrl: "https://github.com",
       featured: true,
-      isDownloadable: true,
+      isUnderReview: true,
+      isMobileApp: true,
       insights: {
         problem: "Limited access to essential services in Kenya, with fragmented platforms making it difficult for users to find and book services efficiently.",
         tools: "React Native for cross-platform mobile development, Node.js for scalable backend, MongoDB for flexible data storage, and Expo for mobile deployment.",
@@ -80,7 +83,8 @@ const Projects = () => {
       id: 4,
       title: "Insurance App (Aminika)",
       description: "A React + Supabase insurance management solution for a startup. Includes a dashboard, insurance products, claims center, get-a-quote system, FAQs, and blog. Features direct email communication to owners via web3Forms integration. Designed for scalability and mobile accessibility.",
-      image: "https://images.pexels.com/photos/5054358/pexels-photo-5054358.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop&crop=center",
+      image: "/src/assets/Aminikal.png",
+      images: ["/src/assets/Aminikal.png", "/src/assets/Aminikap.png"],
       technologies: ["React", "Supabase", "web3Forms", "PostgreSQL", "REST API"],
       category: "Web Development",
       liveUrl: "https://aminika-trusty-cover-5m51.onrender.com/",
@@ -97,13 +101,15 @@ const Projects = () => {
       id: 5,
       title: "PCEA Youth Church App",
       description: "A church youth group application for event management and communication. Features include an events calendar, announcements, and activity tracking. Built as a React app with a mobile-first approach, with integration plans for Capacitor to deliver a native experience.",
-      image: "https://images.pexels.com/photos/28536376/pexels-photo-28536376.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop&crop=center",
+      image: "/src/assets/church.jpeg",
+      images: ["/src/assets/church.jpeg", "/src/assets/church1.jpeg", "/src/assets/church2.jpeg", "/src/assets/church3.jpeg"],
       technologies: ["React", "Capacitor", "Node.js", "MongoDB", "PWA"],
       category: "Mobile Development",
       downloadUrl: "/pcea app.apk",
       githubUrl: "https://github.com",
       featured: false,
       isDownloadable: true,
+      isMobileApp: true,
       insights: {
         problem: "Church youth groups lacked a centralized platform for event coordination and member communication, leading to missed activities and poor engagement.",
         tools: "React for component-based UI, Capacitor for native mobile features, Node.js for server logic, and MongoDB for flexible data storage.",
@@ -126,6 +132,26 @@ const Projects = () => {
         tools: "React for component architecture, Tailwind CSS for utility-first styling, Framer Motion for smooth animations, and TypeScript for type safety.",
         struggle: "Balancing visual appeal with performance optimization. I achieved this through lazy loading, optimized animations, and careful bundle size management."
       }
+    },
+    {
+      id: 7,
+      title: "ChaamaKe",
+      description: "A digital platform for managing chamas (informal savings groups) in Kenya. Enables members to track contributions, access loans, manage investments, and coordinate meetings. Features include automated contribution tracking, loan management, mobile money integration, financial reporting, and real-time notifications. Designed to modernize traditional chama operations while maintaining community trust.",
+      image: "/src/assets/project4.jpeg",
+      images: ["/src/assets/project4.jpeg", "/src/assets/project44.jpeg"],
+      technologies: ["React Native", "Node.js", "MongoDB", "M-Pesa API", "Firebase"],
+      category: "Mobile Development",
+      downloadUrl: "https://github.com/ErickCoder254ke/port/releases/download/v1.0.0/app-release.apk",
+      githubUrl: "https://github.com",
+      featured: true,
+      isLive: true,
+      isDownloadable: true,
+      isMobileApp: true,
+      insights: {
+        problem: "Traditional chamas in Kenya rely on manual record-keeping and cash handling, leading to transparency issues, tracking difficulties, and limited accessibility for members who can't attend physical meetings.",
+        tools: "React Native for cross-platform mobile development, Node.js for real-time data processing, MongoDB for flexible member and transaction data, M-Pesa API for seamless mobile money integration, and Firebase for push notifications.",
+        struggle: "Building trust in digital transactions within communities accustomed to physical cash handling. Solved by implementing transparent audit trails, multi-signature approvals for large transactions, and offline-first architecture for areas with poor connectivity."
+      }
     }
   ];
 
@@ -143,7 +169,8 @@ const Projects = () => {
     if (currentProjectData.isDownloadable) {
       const link = document.createElement('a');
       link.href = currentProjectData.downloadUrl;
-      link.download = true;
+      link.download = currentProjectData.downloadUrl.split('/').pop() || 'app.apk';
+      link.target = '_self';
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
@@ -171,19 +198,19 @@ const Projects = () => {
   };
 
   return (
-    <section id="projects" className="py-20 bg-muted/30">
+    <section id="projects" className="py-8 bg-muted/30">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-6"
         >
-          <h2 className="text-4xl md:text-5xl font-display font-bold mb-6 text-gradient">
+          <h2 className="text-3xl md:text-4xl font-display font-bold mb-3 text-gradient">
             Featured Projects
           </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+          <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
             A showcase of my latest work, demonstrating expertise in modern web development, 
             mobile applications, and creative digital solutions.
           </p>
@@ -201,15 +228,29 @@ const Projects = () => {
             >
               <Card className="overflow-hidden shadow-glow bg-card">
                 <div className="grid lg:grid-cols-2 gap-0">
-                  {/* Project Image */}
-                  <div className="relative overflow-hidden bg-muted">
-                    <img
-                      src={currentProjectData.image}
-                      alt={currentProjectData.title}
-                      className="w-full h-80 lg:h-full object-cover transition-transform duration-700 hover:scale-110"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
-                    <div className="absolute top-4 left-4 space-y-2">
+                  {/* Project Image or Phone Mockup */}
+                  <div className="relative overflow-hidden bg-muted h-96 lg:h-[450px]">
+                    {currentProjectData.isMobileApp && currentProjectData.images ? (
+                      <PhoneMockup
+                        images={currentProjectData.images}
+                        alt={currentProjectData.title}
+                      />
+                    ) : currentProjectData.images && currentProjectData.images.length > 1 ? (
+                      <ImageCarousel
+                        images={currentProjectData.images}
+                        alt={currentProjectData.title}
+                      />
+                    ) : (
+                      <>
+                        <img
+                          src={currentProjectData.image}
+                          alt={currentProjectData.title}
+                          className="w-full h-full object-contain transition-transform duration-700 hover:scale-110"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+                      </>
+                    )}
+                    <div className="absolute top-4 left-4 space-y-2 z-20">
                       {currentProjectData.featured && (
                         <Badge className="bg-primary text-primary-foreground">
                           Featured
@@ -231,13 +272,13 @@ const Projects = () => {
                   </div>
 
                   {/* Project Details */}
-                  <div className="p-8 lg:p-12 flex flex-col justify-center">
-                    <div className="space-y-6">
+                  <div className="p-4 lg:p-6 flex flex-col justify-center">
+                    <div className="space-y-3">
                       <div>
                         <Badge variant="outline" className="mb-3">
                           {currentProjectData.category}
                         </Badge>
-                        <h3 className="text-3xl font-display font-bold text-foreground mb-4">
+                        <h3 className="text-2xl font-display font-bold text-foreground mb-2">
                           {currentProjectData.title}
                         </h3>
                         <p className="text-muted-foreground leading-relaxed">
@@ -247,7 +288,7 @@ const Projects = () => {
 
                       {/* Technologies */}
                       <div>
-                        <h4 className="text-sm font-semibold text-foreground uppercase tracking-wide mb-3">
+                        <h4 className="text-sm font-semibold text-foreground uppercase tracking-wide mb-2">
                           Technologies Used
                         </h4>
                         <div className="flex flex-wrap gap-2">
@@ -284,9 +325,9 @@ const Projects = () => {
                               animate={{ height: "auto", opacity: 1 }}
                               exit={{ height: 0, opacity: 0 }}
                               transition={{ duration: 0.3 }}
-                              className="overflow-hidden mt-4 space-y-4"
+                              className="overflow-hidden mt-3 space-y-3"
                             >
-                              <div className="grid gap-4">
+                              <div className="grid gap-3">
                                 <div className="flex gap-3">
                                   <Target className="w-4 h-4 text-primary mt-1 flex-shrink-0" />
                                   <div>
@@ -315,7 +356,7 @@ const Projects = () => {
                       </div>
 
                       {/* Action Buttons */}
-                      <div className="flex flex-wrap gap-4 pt-4">
+                      <div className="flex flex-wrap gap-3 pt-2">
                         <Button
                           className={`btn-hero group relative ${
                             currentProjectData.isLive
@@ -372,7 +413,7 @@ const Projects = () => {
           </AnimatePresence>
 
           {/* Navigation Controls */}
-          <div className="flex items-center justify-between mt-8">
+          <div className="flex items-center justify-between mt-4">
             <Button
               variant="outline"
               size="icon"
@@ -408,7 +449,7 @@ const Projects = () => {
           </div>
 
           {/* Project Counter */}
-          <div className="text-center mt-6">
+          <div className="text-center mt-3">
             <span className="text-sm text-muted-foreground">
               {currentProject + 1} of {projects.length}
             </span>
@@ -421,9 +462,9 @@ const Projects = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3, duration: 0.8 }}
           viewport={{ once: true }}
-          className="text-center mt-16"
+          className="text-center mt-6"
         >
-          <p className="text-muted-foreground mb-6">
+          <p className="text-muted-foreground mb-4">
             Interested in seeing more of my work?
           </p>
           <Button
